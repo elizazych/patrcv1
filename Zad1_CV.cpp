@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <random>
+#include <vector>
 #include <string>
 
 using namespace std;
@@ -14,7 +15,7 @@ public:
 	void virtual game1() {
 		std::cout << "class Person" << std::endl;
 	}
-
+	
 
 
 };
@@ -45,17 +46,16 @@ void Player::game() {
 	uniform_int_distribution <> dis(1, 6);
 
 	int dice1, dice2;
-	int player1, player2;
+	
+	dice1 = dis(_generator);
+	dice2 = dis(_generator);
+
+	auto player1 = dice1 + dice2;
 
 	dice1 = dis(_generator);
 	dice2 = dis(_generator);
 
-	player1 = dice1 + dice2;
-
-	dice1 = dis(_generator);
-	dice2 = dis(_generator);
-
-	player2 = dice1 + dice2;
+	auto player2 = dice1 + dice2;
 
 	cout << "\t" << name1 << "\t\t\t\t" << name2 << endl;
 	cout << "\t" << player1 << "\t\t\t\t" << player2 << endl;
@@ -78,6 +78,8 @@ int main()
 {
 	//Gra - rzut dwoma kostkami
 	
+	int _array[2] = { 1, 2 };
+	
 	string _player1, _player2;
 	cout << "Player one. Write your name: ";
 	cin >> _player1;
@@ -87,7 +89,12 @@ int main()
 	cout << endl << endl;
 	Person *_player;
 	_player = new Player(_player1, _player2);
-	_player->game();
+	for (int &x : _array)
+	{
+		cout << "Round " << x << endl;
+		_player->game();
+	}
+	
 	_player->game1();
 
 
